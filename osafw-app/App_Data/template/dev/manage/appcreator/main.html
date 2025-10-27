@@ -1,0 +1,123 @@
+<~/common/form/msg>
+
+<h4><a href="<~/dev/manage/url>" class="btn btn-light btn-sm px-3"><i class="bi bi-arrow-left-circle"></i></a> <~title></h4>
+
+<h5 class="mt-4">Select tables from db.json to create models/controllers for</h5>
+<form method="post" action="<~../url>/(AppCreatorSave)">
+    <input type="hidden" name="XSS" value="<~session[XSS]>">
+
+  <div class="row form-row">
+    <label class="col-form-label col-2 text-end">Filter</label>
+    <div class="col-4">
+      <input type="text" class="form-control on-filter" id="fs" name="f[s]" value="">
+    </div>
+  </div>
+
+  <fieldset>
+    <div class="row form-row fw-bold border-bottom mb-2">
+      <div class="col-2 text-end"><a href="<~../url>/(AppCreator)?dofilter=1&f[sort]=table">Table</a></div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-model" id="all-cb-model" checked>
+          <label class="form-check-label" for="all-cb-model" title="select all/none">&nbsp;</label>
+        </div>
+        <a href="<~../url>/(AppCreator)?dofilter=1&f[sort]=model">Model Name (plural)</a>
+      </div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-controller" id="all-cb-controller" checked>
+          <label class="form-check-label" for="all-cb-controller" title="select all/none">&nbsp;</label>
+        </div>
+        Controller URL
+      </div>
+      <div class="col">Controller Title</div>
+      <div class="col">Controller Options
+        <div>
+          <div class="form-check form-check-inline" title="View - select all/none">
+            <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-coview" id="all-cb-coview">
+            <label class="form-check-label" for="all-cb-coview">&nbsp;</label>
+          </div>
+          <div class="form-check form-check-inline" title="Edit - select all/none">
+            <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-coedit" id="all-cb-coedit">
+            <label class="form-check-label" for="all-cb-coedit">&nbsp;</label>
+          </div>
+          <div class="form-check form-check-inline" title="Lookup - select all/none">
+            <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-colookup" id="all-cb-colookup">
+            <label class="form-check-label" for="all-cb-colookup">&nbsp;</label>
+          </div>
+          <div class="form-check form-check-inline" title="Vue - select all/none">
+            <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-cotype" id="all-cb-cotype">
+            <label class="form-check-label" for="all-cb-cotype">&nbsp;</label>
+          </div>
+          <div class="form-check form-check-inline" title="Rewrite Templates - select all/none">
+            <input type="checkbox" class="form-check-input on-all-cb" data-cb=".cb-corwtpl" id="all-cb-corwtpl">
+            <label class="form-check-label" for="all-cb-corwtpl">&nbsp;</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <~entities repeat inline>
+      <div class="row form-row mb-1 one-row" data-s="<~table> <~model_name>">
+        <label class="col-form-label col-2"><~table></label>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input cb-model" id="<~fw_name>#cbmodel" name="item[<~fw_name>#is_model]" <~/common/checked unless="is_model_exists">>
+                <label class="form-check-label" for="<~fw_name>#cbmodel">&nbsp;</label>
+              </div>
+            </div>
+            <input name="item[<~fw_name>#model_name]" maxlength="255" value="" type="text" class="form-control" placeholder="<~model_name>">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input cb-controller" id="<~fw_name>#cbcontroller" name="item[<~fw_name>#is_controller]" <~/common/checked if="is_controller_create">>
+                <label class="form-check-label" for="<~fw_name>#cbcontroller">&nbsp;</label>
+              </div>
+            </div>
+            <input name="item[<~fw_name>#controller_name]" maxlength="255" value="" type="text" class="form-control" placeholder="<~controller[url]>">
+          </div>
+        </div>
+        <div class="col">
+          <input name="item[<~fw_name>#controller_title]" maxlength="255" value="" type="text" class="form-control" placeholder="<~controller[title]>">
+        </div>
+        <div class="col">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input cb-coview" id="<~fw_name>#cbcoview" name="item[<~fw_name>#coview]" <~/common/checked unless="controller[is_lookup]">>
+            <label class="form-check-label" for="<~fw_name>#cbcoview">View</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input cb-coedit" id="<~fw_name>#cbcoedit" name="item[<~fw_name>#coedit]" <~/common/checked unless="controller[is_lookup]">>
+            <label class="form-check-label" for="<~fw_name>#cbcoedit">Edit</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input cb-colookup" id="<~fw_name>#cbcolookup" name="item[<~fw_name>#colookup]" <~/common/checked if="controller[is_lookup]">>
+            <label class="form-check-label" for="<~fw_name>#cbcolookup">Lookup</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input cb-cotype" id="<~fw_name>#cbcotype" name="item[<~fw_name>#cotype]" value="vue" <~/common/checked ifeq="controller[type]" value="vue">>
+            <label class="form-check-label" for="<~fw_name>#cbcotype">Vue</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input cb-corwtpl" id="<~fw_name>#cbcorwtpl" name="item[<~fw_name>#corwtpl]" <~/common/checked ifeq="controller[rewrite_tpl]">>
+            <label class="form-check-label" for="<~fw_name>#cbcorwtpl">Rewrite Templates</label>
+          </div>
+        </div>
+      </div>
+    </~entities>
+
+  </fieldset>
+
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col">
+      <button class="btn btn-primary">Create Models and Controllers</button>
+    </div>
+  </div>
+</form>
+
+<p></p>

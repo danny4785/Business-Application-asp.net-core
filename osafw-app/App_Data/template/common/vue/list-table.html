@@ -1,0 +1,106 @@
+<script type="text/x-template" id="list-table-template">
+    <div>
+        <form class="fw-card" @submit.prevent>
+            <input type="hidden" name="_method" value="PUT">
+
+            <div :class="'table-list-wrapper ' + fwStore.list_user_view.density">
+                <div class="table-list-hscroll-hint">
+                    <i class="bi bi-info-circle-fill"></i> use <kbd>Shift+Mouse Wheel</kbd> for an easy horizontal scrolling
+                </div>
+
+                <table :class="'table table-stripedX table-hover list ' + (fwStore.is_list_edit?'list-edit ':'') + fwStore.list_user_view.density">
+                    <list-table-header />
+
+                    <tbody class="table-group-divider" :class="uioptions.nl2br ? 'nl2br' :'' ">
+                        <template v-for="row in fwStore.list_rows" :key="row[fwStore.field_id]">
+                            <list-table-row :row="row">
+                                <!-- Forward standard prepend/append row-button slots -->
+                                <template #list-row-btn-prepend>
+                                    <slot name="list-row-btn-prepend" :row="row"></slot>
+                                </template>
+                                <template #list-row-btn-append>
+                                    <slot name="list-row-btn-append" :row="row"></slot>
+                                </template>
+                                <!-- Forward any cell-* slots from the parent down to the row -->
+                                <template v-for="header in fwStore.list_headers"
+                                          :key="header.field_name"
+                                          v-slot:['cell-'+header.field_name]="slotProps">
+                                    <slot :name="'cell-'+header.field_name" v-bind="slotProps"></slot>
+                                </template>
+                            </list-table-row>
+                        </template>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="text-center py-4" v-if="!fwStore.list_rows.length">
+                <template v-if="fwStore.is_loading_index">
+                    <span class="spinner-border" role="status" aria-hidden="true"></span>
+                </template>
+                <template v-else>
+                    <h3><i class="bi bi-0-square"></i> `No results`</h3>
+                    Try to
+                    <a :href="'?dofilter=1'+(fwStore.related_id ? '&related_id='+fwStore.related_id : '')">reset</a> all filters.
+                </template>
+            </div>
+
+            <template v-if="fwStore.list_rows.length">
+                <div v-if="uioptions.pagination"
+                     class="float-md-end pt-2 mb-3 d-print-none">
+                    <span class="badge"></span><br>
+                    <div class="d-flex justify-content-md-end">
+                        <list-pagination :pager="fwStore.pager"
+                                         :pagesize="fwStore.f.pagesize"
+                                         :count="fwStore.count"
+                                         :isShowCount="uioptions.pagination.count"
+                                         @on-page="onClickPage"
+                                         @on-pagesize="onChangePagesize"></list-pagination>
+                    </div>
+                </div>
+
+                <list-btn-multi v-if="this.fwStore.uioptions.list.btnMulti"><slot name="list-btn-multi"></slot></list-btn-multi>
+            </template>
+
+        </form>
+
+        <hr class="d-print-none">
+    </div>
+    <list-edit-pane></list-edit-pane>
+</script>
+
+<script type="module">
+    import { mapStores } from 'pinia';
+
+    fwApp.component('list-table', {
+        template: '#list-table-template',
+        props: {},
+        emit: [],
+        data: () => ({
+        }),
+        computed: {
+            ...mapStores(fwStore),
+            uioptions() {
+                return this.fwStore.uioptions.list.table ?? {};
+            }
+        },
+        mounted() {
+            console.log('list-table mounted');
+            this.fwStore.loadIndex();
+        },
+        methods: {
+            resetCheckedRows() {
+                this.fwStore.hchecked_rows = [];
+            },
+            // pagination handlers
+            onClickPage(e) {
+                this.resetCheckedRows();
+                this.fwStore.setFilters({ pagenum: e });
+            },
+            onChangePagesize(e) {
+                this.resetCheckedRows();
+                this.fwStore.setFilters({ pagesize: e });
+            }
+        }
+    });
+</script>

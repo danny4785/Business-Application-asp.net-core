@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h5 class="modal-title"><~./title></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form class="row row-cols-auto g-3 mb-3" method="post" action="<~../url>" enctype="multipart/form-data">
+        <input type="hidden" name="XSS" value="<~session[XSS]>">
+        <input type="hidden" name="mode" value="select">
+
+        <div class="col">
+          <span role="button" class="btn btn-success btn-fileinput me-3">
+            <span class="msg-button"><i class="bi bi-cloud-upload-fill"></i><span> Upload new file...</span></span>
+            <span class="msg-uploading d-none"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> uploading...</span>
+            <input name="file1" type="file">
+          </span>
+        </div>
+        <label class="col col-form-label me-3">`or choose from existing uploads, category`:</label>
+        <div class="col">
+            <select name="item[att_categories_id]" class="form-select">
+                <option value="">- `show all` -</option>
+                <~select_att_categories_id select="att_categories_id">
+            </select>
+        </div>
+    </form>
+
+    <div class="thumbs clearfix">
+        <~att_dr repeat inline>
+            <a class="float-start thumbnail text-truncate" href="#" data-id="<~id>" title="<~iname>">
+                <img src="<~/att/url>/<~icode>?preview=1&size=s" alt="<~iname>" data-url="<~url>" data-is_image="<~is_image>">
+                <span class="title"><~iname></span>
+            </a>
+        </~att_dr>
+    </div>
+</div>

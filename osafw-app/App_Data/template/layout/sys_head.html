@@ -1,0 +1,38 @@
+<meta http-equiv="Content-Security-Policy" content="<~./content_security_policy>">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+ <~/layout/head.js>
+</script>
+
+<title><~title><~tdot ifne="GLOBAL[controller.action]" value="Home.Index" inline> - </~tdot><~/site_name></title>
+<meta name="keywords" content="<~meta_keywords> <~/site_name> <~/keywords>" />
+<meta name="description" content="<~meta_description> <~/site_name>" />
+
+<link href="<~GLOBAL[ASSETS_URL]>/lib/bootstrap/dist/css/bootstrap.min.css?v5.3.3" rel="stylesheet">
+<link href="<~GLOBAL[ASSETS_URL]>/lib/bootstrap-icons/font/bootstrap-icons.min.css?v1.11.3" rel="stylesheet">
+<link href="<~GLOBAL[ASSETS_URL]>/css/site.css?v<~GLOBAL[SITE_VERSION]>" rel="stylesheet">
+<~./theme_link if="GLOBAL[ui_theme]">
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="<~ROOT_URL>/favicon.ico">
+<!--link rel="apple-touch-icon" href="<~GLOBAL[ASSETS_URL]>/img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="<~GLOBAL[ASSETS_URL]>/img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="<~GLOBAL[ASSETS_URL]>/img/apple-touch-icon-114x114.png"-->
+
+<style type="text/css">
+<!--
+<~head.css>
+-->
+</style>
+
+<script type="text/javascript">
+ var ROOT_URL="<~ROOT_URL>";
+ var me_id=<~SESSION[user_id]>+0;
+ var lng;
+ <~./head_common.js>
+</script>
+
+<~head_script>

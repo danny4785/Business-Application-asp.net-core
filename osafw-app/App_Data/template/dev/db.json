@@ -1,0 +1,1096 @@
+[
+  {
+    "iname": "Customers",
+    "table": "customers",
+    "fw_name": "customers",
+    "model_name": "Customers",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Customer entity with standard fields",
+    "controller": {
+      "title": "Customers",
+      "url": "/Admin/Customers",
+      "is_lookup": false,
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true,
+      "type": "",
+      "rwtpl": false
+    },
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Name",
+        "name": "iname",
+        "fw_name": "iname",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Notes",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Email",
+        "name": "email",
+        "fw_name": "email",
+        "comments": "Email is unique and required",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": null,
+        "maxlen": 255,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Phone",
+        "name": "phone",
+        "fw_name": "phone",
+        "comments": "Defining specific field length",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 20,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Address",
+        "name": "address",
+        "fw_name": "address",
+        "comments": "Makes SQL field \u0022address nvarchar(MAX) NOT NULL DEFAULT \u0027\u0027\u0022",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Is Active",
+        "name": "is_active",
+        "fw_name": "is_active",
+        "comments": "Makes \u0022is_active bit DEFAULT(1) NULL\u0022",
+        "fw_type": "int",
+        "fw_subtype": "bit",
+        "default": "1",
+        "maxlen": 1,
+        "is_nullable": 0,
+        "ui": {
+          "checkbox": true
+        }
+      },
+      {
+        "iname": "Lead User",
+        "name": "lead_users_id",
+        "fw_name": "lead_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "is_nullable": 1
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "lead_users_id",
+        "pk_table": "users",
+        "pk_column": "id"
+      },
+      {
+        "column": "add_users_id",
+        "pk_table": "users",
+        "pk_column": "id"
+      },
+      {
+        "column": "upd_users_id",
+        "pk_table": "users",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "UX1": "email",
+      "IX2": "lead_users_id"
+    }
+  },
+  {
+    "iname": "Customers Notes",
+    "table": "customers_notes",
+    "fw_name": "customers_notes",
+    "model_name": "CustomersNotes",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Notes for customers, excludes standard fields",
+    "controller": {
+      "title": "Customers Notes",
+      "url": "/Admin/CustomersNotes",
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true
+    },
+    "fields": [
+      {
+        "iname": "Customer",
+        "name": "customers_id",
+        "fw_name": "customers_id",
+        "comments": "Foreign key to customers, NOT NULL because of required",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Description",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "comments": "Using idesc field for the note content",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Add Time",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "getdate(",
+        "is_nullable": 1
+      },
+      {
+        "iname": "Add User",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": 0,
+        "maxlen": 10,
+        "is_nullable": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "customers_id",
+        "pk_table": "customers",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "IX1": "customers_id"
+    }
+  },
+  {
+    "iname": "Vendors",
+    "table": "vendors",
+    "fw_name": "vendors",
+    "model_name": "Vendors",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Vendor entity with standard fields",
+    "controller": {
+      "title": "Vendors",
+      "url": "/Admin/Vendors",
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true
+    },
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Notes",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Name",
+        "name": "iname",
+        "fw_name": "iname",
+        "comments": "Override standard iname",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0,
+        "ui": {
+          "label": "Company name"
+        }
+      },
+      {
+        "iname": "Contact Name",
+        "name": "contact_name",
+        "fw_name": "contact_name",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Phone",
+        "name": "phone",
+        "fw_name": "phone",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 20,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Email",
+        "name": "email",
+        "fw_name": "email",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Address",
+        "name": "address",
+        "fw_name": "address",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": {
+      "UX1": "email"
+    }
+  },
+  {
+    "iname": "Categories",
+    "table": "categories",
+    "fw_name": "categories",
+    "model_name": "Categories",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Lookup table for product categories",
+    "controller": {
+      "title": "Categories",
+      "url": "/Admin/Categories",
+      "is_lookup": true,
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true
+    },
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Name",
+        "name": "iname",
+        "fw_name": "iname",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Notes",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": {}
+  },
+  {
+    "iname": "Products",
+    "table": "products",
+    "fw_name": "products",
+    "model_name": "Products",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Product entity with vendor link and category junction",
+    "controller": {
+      "title": "Products",
+      "url": "/Admin/Products",
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true
+    },
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Name",
+        "name": "iname",
+        "fw_name": "iname",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Notes",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Vendor",
+        "name": "vendors_id",
+        "fw_name": "vendors_id",
+        "comments": "Foreign key to vendors",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Price",
+        "name": "price",
+        "fw_name": "price",
+        "fw_type": "float",
+        "fw_subtype": "decimal",
+        "default": "0.0",
+        "is_nullable": 0,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "ui": {
+          "required": true,
+          "step": "0.1",
+          "number": true
+        }
+      },
+      {
+        "iname": "Stock Quantity",
+        "name": "stock_quantity",
+        "fw_name": "stock_quantity",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": "0",
+        "maxlen": 10,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "vendors_id",
+        "pk_table": "vendors",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "IX1": "vendors_id",
+      "UX2": "iname"
+    }
+  },
+  {
+    "iname": "Products Categories",
+    "table": "products_categories",
+    "fw_name": "products_categories",
+    "model_name": "ProductsCategories",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Creates junction table \u0060products_categories\u0060",
+    "fields": [
+      {
+        "iname": "Products",
+        "name": "products_id",
+        "fw_name": "products_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Categories",
+        "name": "categories_id",
+        "fw_name": "categories_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "products_id",
+        "pk_table": "products",
+        "pk_column": "id"
+      },
+      {
+        "column": "categories_id",
+        "pk_table": "categories",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "PK": "products_id, categories_id",
+      "UX1": "categories_id, products_id"
+    },
+    "is_junction": true
+  },
+  {
+    "iname": "Orders",
+    "table": "orders",
+    "fw_name": "orders",
+    "model_name": "Orders",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Orders entity with items junction",
+    "controller": {
+      "title": "Orders",
+      "url": "/Admin/Orders",
+      "is_dynamic_show": true,
+      "is_dynamic_showform": true
+    },
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Name",
+        "name": "iname",
+        "fw_name": "iname",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": 255,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Notes",
+        "name": "idesc",
+        "fw_name": "idesc",
+        "fw_type": "varchar",
+        "fw_subtype": "nvarchar",
+        "default": "",
+        "maxlen": -1,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Customer",
+        "name": "customers_id",
+        "fw_name": "customers_id",
+        "comments": "Foreign key to customers",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Order Date",
+        "name": "order_date",
+        "fw_name": "order_date",
+        "fw_type": "datetime",
+        "fw_subtype": "date",
+        "default": "now",
+        "is_nullable": 1
+      },
+      {
+        "iname": "Total Amount",
+        "name": "total_amount",
+        "fw_name": "total_amount",
+        "fw_type": "float",
+        "fw_subtype": "decimal",
+        "default": "0.0",
+        "is_nullable": 0,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "customers_id",
+        "pk_table": "customers",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "IX1": "customers_id"
+    }
+  },
+  {
+    "iname": "Orders Items",
+    "table": "orders_items",
+    "fw_name": "orders_items",
+    "model_name": "OrdersItems",
+    "is_fw": true,
+    "db_config": "",
+    "comments": "Order items entity with additional fields, no controller",
+    "fields": [
+      {
+        "iname": "ID",
+        "name": "id",
+        "fw_name": "id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 1,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Order",
+        "name": "orders_id",
+        "fw_name": "orders_id",
+        "comments": "Foreign key to orders",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Product",
+        "name": "products_id",
+        "fw_name": "products_id",
+        "comments": "Foreign key to products",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "is_nullable": 0,
+        "ui": {
+          "required": true
+        }
+      },
+      {
+        "iname": "Quantity",
+        "name": "quantity",
+        "fw_name": "quantity",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": "1",
+        "maxlen": 10,
+        "is_nullable": 0
+      },
+      {
+        "iname": "Price",
+        "name": "price",
+        "fw_name": "price",
+        "fw_type": "float",
+        "fw_subtype": "decimal",
+        "default": "0.0",
+        "is_nullable": 0,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      {
+        "iname": "Status",
+        "name": "status",
+        "fw_name": "status",
+        "fw_type": "int",
+        "fw_subtype": "tinyint",
+        "default": 0,
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added on",
+        "name": "add_time",
+        "fw_name": "add_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": "GETDATE()",
+        "maxlen": null,
+        "is_nullable": 0,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Added by",
+        "name": "add_users_id",
+        "fw_name": "add_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated on",
+        "name": "upd_time",
+        "fw_name": "upd_time",
+        "fw_type": "datetime",
+        "fw_subtype": "datetime2",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      },
+      {
+        "iname": "Updated by",
+        "name": "upd_users_id",
+        "fw_name": "upd_users_id",
+        "fw_type": "int",
+        "fw_subtype": "int",
+        "default": null,
+        "maxlen": null,
+        "is_nullable": 1,
+        "is_identity": 0,
+        "numeric_precision": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column": "orders_id",
+        "pk_table": "orders",
+        "pk_column": "id"
+      },
+      {
+        "column": "products_id",
+        "pk_table": "products",
+        "pk_column": "id"
+      }
+    ],
+    "indexes": {
+      "IX1": "orders_id",
+      "IX2": "products_id",
+      "UX3": "orders_id, products_id"
+    }
+  }
+]
